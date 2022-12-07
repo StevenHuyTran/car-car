@@ -15,8 +15,8 @@ class Appointment(models.Model):
     customer_name = models.CharField(max_length=200)
     date = models.DateField()
     time = models.TimeField()
-    reason = models.CharField
-    finished = models.BooleanField(default=False)
+    reason = models.CharField(max_length=300)
+    status = models.CharField(max_length=30, default="scheduled")
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
