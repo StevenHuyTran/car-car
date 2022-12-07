@@ -13,10 +13,11 @@ class Technician(models.Model):
 class Appointment(models.Model):
     auto_vin = models.CharField(max_length=200)
     customer_name = models.CharField(max_length=200)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
     reason = models.CharField(max_length=300)
-    status = models.CharField(max_length=30, default="scheduled")
+    finished = models.BooleanField(default=False)
+    vip = models.BooleanField()
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
@@ -28,7 +29,7 @@ class Appointment(models.Model):
 
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200, unique=True)
+    import_href = models.CharField(max_length=200, unique=True, null=True)
     color = models.CharField(max_length=200)
     vin = models.CharField(max_length=17, unique=True)
 

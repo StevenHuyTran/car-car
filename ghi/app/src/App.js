@@ -17,21 +17,26 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+
           <Route path="manufacturers">
             <Route path="/manufacturers/" element={<ManufacturersList />} />
+            <Route path="/manufacturers/new" element={<ManufacturerForm />} />
           </Route>
-          <Route path="manufacturers">
-            <Route path="manufactures/new" element={<ManufacturerForm />} />
+
+          <Route path="models">
+            <Route path="" element={<VehicleModelList />} />
+            <Route path="new" element={<VehicleModelForm />} />
           </Route>
-          <Route path="models" element={<VehicleModelList />} />
-          <Route path="models/new" element={<VehicleModelForm />} />
-          {/* once automobileList is done, create parent route for automobileFirm */}
-          <Route path="automobiles/new" element={<AutomobileForm />} />
+
           <Route path="services">
-            <Route path="new" element={<AppointmentForm />} />
             <Route path="" element={<AppointmentList />} />
+            <Route path="new" element={<AppointmentForm />} />
           </Route>
-          <Route path="automobiles" element={ <AutomobileList />} />
+
+          <Route path="automobiles">
+            <Route path="" element={<AutomobileList />} />
+            <Route path="new" element={<AutomobileForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
