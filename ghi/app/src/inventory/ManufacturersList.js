@@ -32,7 +32,7 @@ class ManufacturersList extends React.Component {
         return (
             <>
             <div>
-                <h1 className="shadow p-4 mt-4">Manufactures</h1>
+                <h1 className="shadow p-4 mt-4">Manufacturers</h1>
                 <table className="table table-striped">
                     <thead>
                         <tr>
