@@ -20,12 +20,10 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturers">
             <Route path="/manufacturers/" element={<ManufacturersList />} />
-            <Route path="manufacturers/new" element={<ManufacturerForm />} />
+            <Route path="/manufacturers/new" element={<ManufacturerForm />} />
           </Route>
-          <Route path="vehicles">
-          <Route path="models" element={<VehicleModelList />} />
-          <Route path="models/new" element={<VehicleModelForm />} />
-          </Route>
+          
+          
           <Route path="automobiles">
           <Route path="automobiles/new" element={<AutomobileForm />} />
           <Route path="automobiles/" element={<AutomobileList />} />
