@@ -11,7 +11,7 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
-    vin = models.CharField(max_length=200)
+    auto_vin = models.CharField(max_length=200)
     customer_name = models.CharField(max_length=200)
     date = models.DateField()
     time = models.TimeField()
@@ -28,7 +28,7 @@ class Appointment(models.Model):
 
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200)
+    import_href = models.CharField(max_length=200, unique=True)
     color = models.CharField(max_length=200)
     vin = models.CharField(max_length=17, unique=True)
 

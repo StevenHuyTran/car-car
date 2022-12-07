@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppointmentForm from "./service/AppointmentForm";
 import VehicleModelForm from "./inventory/VehicleModelForm";
 import VehicleModelList from "./inventory/VehicleModelList";
 import ManufacturerForm from "./inventory/ManufacturerForm";
@@ -22,7 +23,11 @@ function App() {
           </Route>
           <Route path="models" element={<VehicleModelList />} />
           <Route path="models/new" element={<VehicleModelForm />} />
+          {/* once automobileList is done, create parent route for automobileFirm */}
           <Route path="automobiles/new" element={<AutomobileForm />} />
+          <Route path="services">
+            <Route path="new" element={<AppointmentForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
