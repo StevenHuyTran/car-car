@@ -1,11 +1,20 @@
 import React from "react";
 
-class ManufacturerList extends React.Component {
+function ManufacturerTable(props) {
+    return (
+        <tr key={props.manufacturer.id}>
+            <td>{props.manufacturer.name}</td>
+        </tr>
+    )
+}
+
+
+class ManufacturersList extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            manufacturer: []
+            manufacturers: []
         }
     }
 
@@ -21,7 +30,28 @@ class ManufacturerList extends React.Component {
 
     render() {
         return (
-            
-        )
+            <>
+            <div>
+                <h1 className="shadow p-4 mt-4">Manufactures</h1>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.manufacturers.map((manufacturer) => {
+                            return (
+                                <ManufacturerTable manufacturer={manufacturer} key={manufacturer.id}
+                                />
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+                </>
+            );
+        }
     }
-}
+    export default ManufacturersList;
+    

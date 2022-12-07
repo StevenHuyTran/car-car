@@ -46,7 +46,7 @@ class ManufacturerForm extends React.Component {
                 <form onSubmit={this.handleSubmit}id="create-manufacturer-form">
                     <div className="form-floating mb-3">
                         <input onChange={this.handleNameChange} value = {this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
-                        <lable htmlFor="name">Name</lable>
+                        <label htmlFor="name">Name</label>
                     </div>
                     <button className="btn btn-primary">Create</button>
                 </form>
