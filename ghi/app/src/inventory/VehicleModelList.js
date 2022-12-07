@@ -24,7 +24,7 @@ class VehicleModelList extends React.Component {
     return (
       <>
         <p></p>
-        <h1>Vehicle models</h1>
+        <h1 className="shadow p-4 mt-4">Vehicle Models</h1>
         <table className="table table-striped">
           <thead>
             <tr>
