@@ -61,7 +61,7 @@ class Sale_RecordForm extends React.Component {
             },
         }
         const response = await fetch(url, fetchConfig);
-        console.log("!@#m", response)
+        console.log(response)
         if (response.ok) {
           const newSaleRecord = await response.json();
           console.log(newSaleRecord);
