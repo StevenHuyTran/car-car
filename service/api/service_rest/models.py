@@ -11,26 +11,27 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
-    auto_vin = models.CharField(max_length=200)
+    auto_vin  = models.CharField(max_length=17, null=True, blank=True)
     customer_name = models.CharField(max_length=200)
-    date = models.DateField(null=True)
-    time = models.TimeField(null=True)
+    time = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
     reason = models.CharField(max_length=300)
-    finished = models.BooleanField(default=False)
-    vip = models.BooleanField()
+    # status = models.BooleanField(default=False)
+    vip = models.BooleanField(default=False)
+
     technician = models.ForeignKey(
         Technician,
         related_name="appointments",
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return (f"{self.customer_name} on {self.date}")
+        return (f"{self.customer_name} on {self.time}")
+
+    def finish(self):
+        return (f"{self.reason} for {self.customer_name}")
 
 
 class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200, unique=True, null=True)
-    color = models.CharField(max_length=200)
     vin = models.CharField(max_length=17, unique=True)
 
     def __str__(self):

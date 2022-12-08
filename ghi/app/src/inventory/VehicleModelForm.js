@@ -6,6 +6,7 @@ class VehicleModelForm extends React.Component {
     this.state = {
       name: "",
       picture_url: "",
+      // manufacturer: "",
       manufacturers: [],
       newVehicle: false,
     };
@@ -13,16 +14,20 @@ class VehicleModelForm extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePictureUrlChange = this.handlePictureUrlChange.bind(this);
     this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async handleSubmit(event) {
     event.preventDefault();
     const data = { ...this.state };
+    data.picture_url = data.pictureUrl;
+    delete data.pictureUrl;
     delete data.manufacturers;
+    delete data.manufacturer;
     delete data.newVehicle;
     console.log(data);
 
-    const vehicleUrl = "http://localhost:8100/api/models";
+    const vehicleUrl = "http://localhost:8100/api/models/";
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
@@ -30,6 +35,12 @@ class VehicleModelForm extends React.Component {
         "Content-Type": "application/json",
       },
     };
+
+    const response = await fetch(vehicleUrl, fetchConfig);
+    if (response.ok) {
+      const newVehicle = await response.json();
+      console.log(newVehicle);
+    }
 
     const cleared = {
       name: "",
@@ -39,7 +50,7 @@ class VehicleModelForm extends React.Component {
     };
 
     this.setState(cleared);
-    window.location.href = "/models";
+    // window.location.href = "/models";
   }
 
   handleNameChange(event) {
@@ -54,7 +65,7 @@ class VehicleModelForm extends React.Component {
 
   handleManufacturerChange(event) {
     const value = event.target.value;
-    this.setState({ manufacturers: value });
+    this.setState({ manufacturer: value });
   }
 
   async componentDidMount() {
@@ -68,12 +79,12 @@ class VehicleModelForm extends React.Component {
   }
 
   render() {
-    let messageClasses = "alert alert-success d-none mb-0";
-    let formClasses = "";
-    if (this.state.newVehicle) {
-      messageClasses = "alert alert-success mb-0";
-      formClasses = "d-none";
-    }
+    // let messageClasses = "alert alert-success d-none mb-0";
+    // let formClasses = "";
+    // if (this.state.newVehicle) {
+    //   messageClasses = "alert alert-success mb-0";
+    //   formClasses = "d-none";
+    // }
 
     return (
       <div className="row">
@@ -110,7 +121,7 @@ class VehicleModelForm extends React.Component {
               <div className="mb-3">
                 <select
                   onChange={this.handleManufacturerChange}
-                  value={this.state.manufacturer_id}
+                  value={this.state.manufacturer}
                   required
                   name="manufacturer"
                   id="manufacturer"
@@ -119,7 +130,7 @@ class VehicleModelForm extends React.Component {
                   <option value="">Choose a Manufacturer</option>
                   {this.state.manufacturers.map((manufacturer) => {
                     return (
-                      <option key={manufacturer.id} value={manufacturer.id}>
+                      <option key={manufacturer.name} value={manufacturer.name}>
                         {manufacturer.name}
                       </option>
                     );
@@ -128,10 +139,10 @@ class VehicleModelForm extends React.Component {
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
+            {/* <div className={messageClasses} id="success-message">
+              New Vehicle Created!
+            </div> */}
           </div>
-        </div>
-        <div className={messageClasses} id="success-message">
-          New Vehicle Created!
         </div>
       </div>
     );

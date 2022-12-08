@@ -11,7 +11,7 @@ class AppointmentList extends React.Component {
   async componentDidMount() {
     // if this url loads, set the state of the
     // appointment empty appointment list to reflect current appointments
-    const url = "http://localhost:8080/api/services/";
+    const url = "http://localhost:8080/api/appointments/";
     const response = await fetch(url);
     console.log(response);
 
@@ -53,31 +53,43 @@ class AppointmentList extends React.Component {
           <div id="alert">
             <div></div>
           </div>
-          <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
-              <h1>Appointment List</h1>
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th>VIN</th>
-                    <th>Customer Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Technician</th>
-                    <th>Reason</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
+          <div className="col-10">
+            <h1>Appointment List</h1>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>VIN</th>
+                  <th>Customer Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Technician</th>
+                  <th>Reason</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.appointments.map((appointment) => {
+                  const dateObj = new Date(appointment.time);
+                  const options = { timeStyle: "short" };
+                  return (
+                    <tr key={appointment.id}>
+                      <td>{appointment.auto_vin}</td>
+                      <td>{appointment.customer_name}</td>
+                      <td>{dateObj.toLocaleDateString()}</td>
+                      <td>{dateObj.toLocaleTimeString([], options)}</td>
+                      <td>{appointment.technician.name}</td>
+                      <td>{appointment.reason}</td>
+                    </tr>
+                  );
+                })}
+                {/* <tr>
                     <td>
                       <button type="button" className="btn btn-danger">
                         Cancel
                       </button>
                     </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                  </tr> */}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
