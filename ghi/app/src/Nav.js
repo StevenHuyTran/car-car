@@ -35,6 +35,19 @@ function Nav() {
         <NavLink className="nav-link" to="/technicians/new">
           Create Technician
         </NavLink>
+
+        <NavLink className="nav-link" to="/automobiles">
+          Automobile List
+        </NavLink>
+        <NavLink className="nav-link" to="/employee_sales">
+          Employee Sales List
+        </NavLink>
+        <NavLink className="nav-link" to="/sales/potential_customer">
+          Potential Customer
+        </NavLink>
+        <NavLink className="nav-link" to="/sales/sale_record">
+          Sale Record
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
