@@ -1,6 +1,6 @@
 import React from "react";
 
-class Sale_PersonForm extends React.Component {
+class Sales_PersonForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +25,7 @@ class Sale_PersonForm extends React.Component {
         event.preventDefault();
         const data = {...this.state};
         console.log(data)
-        const url = "http://localhost:8090/api/sales/sale_person"; 
+        const url = "http://localhost:8090/api/sales"; 
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -38,11 +38,38 @@ class Sale_PersonForm extends React.Component {
         if (response.ok) {
           const newSalePerson = await response.json();
           console.log(newSalePerson);
-         
+          const cleared = {
+            name:'',
+            employee_number:'',
+          };
           this.setState(cleared)
     }
-
     }
+    render() {
+        return (
+          <div className="row">
+            <div className="offset-3 col-6">
+              <div className="shadow p-4 mt-4">
+                <h1>Add a sales person</h1>
+                <form onSubmit = {this.handleSubmit} id="create-sales-person-form">
+                  <div className="form-floating mb-3">
+                    <input onChange ={this.handleNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control" value={this.state.name} />
+                    <label htmlFor="name">Name</label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <input onChange ={this.handleEmployeeNumberChange} placeholder="Employee number" required type="number" name="employee_number" id="employee_number" className="form-control" value={this.state.employee_number} />
+                    <label htmlFor="employee_number">Employee Number</label>
+                  </div>
+                  <button className="btn btn-primary">Create</button>
+                </form>
+              </div>
+            </div>
+          </div>
+            );
+          }
+        }
+        export default Sales_PersonForm;
+        
     
 
     
