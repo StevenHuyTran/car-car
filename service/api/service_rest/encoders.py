@@ -5,6 +5,7 @@ from common.json import ModelEncoder
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
+        "id",
         "name",
         "employee_number",
     ]
@@ -17,7 +18,7 @@ class AppointmentEncoder(ModelEncoder):
         "customer_name",
         "time",
         "reason",
-        "vip",
+        # "vip",
         # "status",
         "technician",
     ]

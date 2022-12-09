@@ -26,11 +26,14 @@ class AppointmentForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const data = { ...this.state };
-    delete data.models;
-    delete data.newAutomobile;
+    data.time = `${data.date} ${data.time}`;
+    console.log(data);
+    console.log(data.time);
+    delete data.date;
+    delete data.technicians;
+    delete data.newAppointment;
 
-    // const serviceUrl = `http://localhost:8100/api/appointments/${data["auto_vin"]}/`;
-    const serviceUrl = "http://localhost:8100/api/appointments/";
+    const serviceUrl = "http://localhost:8080/api/appointments/";
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
@@ -45,7 +48,7 @@ class AppointmentForm extends React.Component {
       console.log(appointmentData);
 
       const cleared = {
-        vin: "",
+        auto_vin: "",
         customer_name: "",
         date: "",
         time: "",
@@ -53,7 +56,7 @@ class AppointmentForm extends React.Component {
         technician: "",
       };
       this.setState(cleared);
-      window.location.href = "/appointments";
+      // window.location.href = "/appointments";
     }
   }
 
@@ -161,7 +164,7 @@ class AppointmentForm extends React.Component {
                   onChange={this.handleDateChange}
                   placeholder="date"
                   required
-                  type="text"
+                  type="date"
                   name="date"
                   id="date"
                   className="form-control"
@@ -173,8 +176,8 @@ class AppointmentForm extends React.Component {
                 <input
                   value={this.state.time}
                   onChange={this.handleTimeChange}
-                  placeholder="Picture URL"
-                  type="text"
+                  placeholder="time"
+                  type="time"
                   name="time"
                   id="time"
                   className="form-control"
@@ -208,7 +211,10 @@ class AppointmentForm extends React.Component {
                   <option value="">Assign Technician</option>
                   {this.state.technicians.map((technician) => {
                     return (
-                      <option key={technician.name} value={technician.name}>
+                      <option
+                        key={technician.id}
+                        value={technician.employee_number}
+                      >
                         {technician.name}
                       </option>
                     );
