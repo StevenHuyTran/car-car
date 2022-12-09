@@ -4,7 +4,7 @@ class ManufacturerForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           name: "", 
+           name: "",
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -27,8 +27,8 @@ class ManufacturerForm extends React.Component {
             "Content-Type": "application/json",
             },
         };
+        
         const response = await fetch(ManufacturerUrl, fetchConfig);
-
         if (response.ok) {
             const NewManufacturer = await response.json();
             const cleared = {

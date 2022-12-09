@@ -12,7 +12,7 @@ class VehicleModelList extends React.Component {
   }
 
   async componentDidMount() {
-    const url = await fetch("http://localhost:8100/api/models/");
+    const url = "http://localhost:8100/api/models/";
     const response = await fetch(url);
     if (response.ok) {
       const data = await response.json();
@@ -20,6 +20,7 @@ class VehicleModelList extends React.Component {
       this.setState({ models: data.models });
     }
   }
+
   render() {
     return (
       <>
@@ -29,8 +30,8 @@ class VehicleModelList extends React.Component {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Manufacturer</th>
               <th>Picture</th>
+              <th>Manufacturer</th>
             </tr>
           </thead>
           <tbody>

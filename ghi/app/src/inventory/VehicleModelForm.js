@@ -6,7 +6,7 @@ class VehicleModelForm extends React.Component {
     this.state = {
       name: "",
       picture_url: "",
-      // manufacturer: "",
+      manufacturer_id: "",
       manufacturers: [],
       newVehicle: false,
     };
@@ -20,11 +20,8 @@ class VehicleModelForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const data = { ...this.state };
-    data.picture_url = data.pictureUrl;
-    // delete data.pictureUrl;
     delete data.manufacturers;
-    // delete data.manufacturer;
-    // delete data.newVehicle;
+    delete data.newVehicle;
     console.log(data);
 
     const vehicleUrl = "http://localhost:8100/api/models/";
@@ -45,7 +42,7 @@ class VehicleModelForm extends React.Component {
     const cleared = {
       name: "",
       picture_url: "",
-      manufacturers: "",
+      manufacturer_id: "",
       newVehicle: true,
     };
 
@@ -65,11 +62,11 @@ class VehicleModelForm extends React.Component {
 
   handleManufacturerChange(event) {
     const value = event.target.value;
-    this.setState({ manufacturer: value });
+    this.setState({ manufacturer_id: value });
   }
 
   async componentDidMount() {
-    const url = "http://localhost:8100/api/manufacturers";
+    const url = "http://localhost:8100/api/manufacturers/";
 
     const response = await fetch(url);
     if (response.ok) {
@@ -109,19 +106,19 @@ class VehicleModelForm extends React.Component {
                 <input
                   onChange={this.handlePictureUrlChange}
                   value={this.state.picture_url}
-                  placeholder="pictureurl"
+                  placeholder="picture_url"
                   required
                   type="text"
-                  name="pictureurl"
-                  id="pictureurl"
+                  name="picture_url"
+                  id="picture_url"
                   className="form-control"
                 />
-                <label htmlFor="pictureurl">Picture URL</label>
+                <label htmlFor="picture_url">Picture URL</label>
               </div>
               <div className="mb-3">
                 <select
                   onChange={this.handleManufacturerChange}
-                  value={this.state.manufacturer}
+                  value={this.state.manufacturer_id}
                   required
                   name="manufacturer"
                   id="manufacturer"
@@ -130,7 +127,7 @@ class VehicleModelForm extends React.Component {
                   <option value="">Choose a Manufacturer</option>
                   {this.state.manufacturers.map((manufacturer) => {
                     return (
-                      <option key={manufacturer.name} value={manufacturer.name}>
+                      <option key={manufacturer.id} value={manufacturer.id}>
                         {manufacturer.name}
                       </option>
                     );
