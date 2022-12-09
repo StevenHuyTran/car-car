@@ -7,7 +7,7 @@ class AutomobileForm extends React.Component {
       color: "",
       year: "",
       vin: "",
-      model: "",
+      model_id: "",
       models: [],
       newAutomobile: false,
     };
@@ -35,16 +35,27 @@ class AutomobileForm extends React.Component {
     };
 
     const response = await fetch(url, fetchConfig);
+    console.log(response);
     if (response.ok) {
       const cleared = {
         color: "",
         year: "",
         vin: "",
-        model: "",
+        model_id: "",
         newAutomobile: true,
       };
+
       this.setState(cleared);
       this.componentDidMount();
+    }
+  }
+
+  async componentDidMount() {
+    const url = "http://localhost:8100/api/models/";
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      this.setState({ models: data.models });
     }
   }
 
@@ -65,16 +76,7 @@ class AutomobileForm extends React.Component {
 
   handleModelChange(event) {
     const value = event.target.value;
-    this.setState({ model: value });
-  }
-
-  async componentDidMount() {
-    const url = "http://localhost:8100/api/models/";
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      this.setState({ models: data.models });
-    }
+    this.setState({ model_id: value });
   }
 
   render() {
@@ -136,16 +138,16 @@ class AutomobileForm extends React.Component {
               <div className="mb-3">
                 <select
                   onChange={this.handleModelChange}
-                  value={this.state.model}
+                  value={this.state.model_id}
                   required
-                  name="model"
-                  id="model"
+                  name="model_id"
+                  id="model_id"
                   className="form-select"
                 >
                   <option value="">Choose a Model</option>
                   {this.state.models.map((model) => {
                     return (
-                      <option key={model.name} value={model.name}>
+                      <option key={model.id} value={model.id}>
                         {model.name}
                       </option>
                     );
