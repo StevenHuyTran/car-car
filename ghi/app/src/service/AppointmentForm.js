@@ -204,7 +204,7 @@ class AppointmentForm extends React.Component {
                   id="technician"
                   className="form-select"
                 >
-                  <option value="">Assign Technician</option>
+                  <option value="">Assign Technician-Not working yet</option>
                   {this.state.technicians.map((technician) => {
                     return (
                       <option

@@ -16,8 +16,27 @@ function Nav() {
         <NavLink className="nav-link" to="/employee_sales">Employee Sales List</NavLink>
         <NavLink className="nav-link" to="/sales/potential_customer">Potential Customer</NavLink>
         <NavLink className="nav-link" to="/sales/sale_record">Sale Record</NavLink>
-        <NavLink className="dropdown-item" to="/sales/create">Sales Person Form</NavLink>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <NavLink className="nav-link" to="/sales/create">Sales Person Form</NavLink>
+        <NavLink className="nav-link" to="/sales/sales_list">All Sales</NavLink>
+        <NavLink className="nav-link" to="/services/new">
+          New Appointment
+        </NavLink>
+        <NavLink className="nav-link" to="/services/">
+          Appointments
+        </NavLink>
+
+        <NavLink className="nav-link" to="/technicians/new">
+          Create Technician
+        </NavLink>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">

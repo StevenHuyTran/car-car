@@ -34,15 +34,29 @@ class AutomobileForm extends React.Component {
       },
     };
 
-    const cleared = {
-      color: "",
-      year: "",
-      vin: "",
-      model: "",
-      newAutomobile: true,
-    };
+    const response = await fetch(url, fetchConfig);
+    if (response.ok) {
+      const newAutoData = await response.json();
+      console.log(newAutoData);
+      this.setState({
+        color: "",
+        year: "",
+        vin: "",
+        models: [],
+        model: "",
+        newAutomobile: true,
+      });
+    }
 
-    this.setState(cleared);
+    // const cleared = {
+    //   color: "",
+    //   year: "",
+    //   vin: "",
+    //   model: "",
+    //   newAutomobile: true,
+    // };
+
+    // this.setState(cleared);
     window.location.href = "/automobiles";
   }
 
@@ -141,9 +155,9 @@ class AutomobileForm extends React.Component {
                   className="form-select"
                 >
                   <option value="">Choose a Model</option>
-                  {this.state.models.map((models) => {
+                  {this.state.models.map((model) => {
                     return (
-                      <option key={model.id} value={model.id}>
+                      <option key={model.name} value={model.name}>
                         {model.name}
                       </option>
                     );

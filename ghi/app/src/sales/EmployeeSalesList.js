@@ -18,8 +18,9 @@ class EmployeeSalesList extends React.Component {
         this.state = {
             employee_sales_list: [],
         };
-    }
 
+    }
+    
     async componentDidMount() {
         const url = "http://localhost:8090/api/sales/sale_record/";
         const response = await fetch (url);
@@ -37,7 +38,7 @@ class EmployeeSalesList extends React.Component {
                 <h1 className="shadow p-4 mt-4">Employee sales history</h1>
                 <div className="dropdown show">
                 <a className="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select a sales person
+                    Select a sales person
                 </a>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 </div>

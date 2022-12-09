@@ -4,28 +4,28 @@ class Sales_PersonForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            employee_number: "",
+            name: '',
+            employee_number: '',
         }
-        this.handleCustomerChange = this.handleCustomerChange.bind(this);
-        this.handleEmployeeNumberChange = this.handleEmployeeNumberChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleEmployeeNumberChange = this.handleEmployeeNumberChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
     }
-
     handleNameChange(event){
         const value = event.target.value
         this.setState({ name: value});
     }
-    
-    handleEmploeeNumberChange(event){
+
+    handleEmployeeNumberChange(event){
         const value = event.target.value
         this.setState({ employee_number: value});
     }
+
     async handleSubmit(event){
         event.preventDefault();
         const data = {...this.state};
         console.log(data)
-        const url = "http://localhost:8090/api/sales"; 
+        const url = "http://localhost:8090/api/sales/"; 
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -36,8 +36,8 @@ class Sales_PersonForm extends React.Component {
         const response = await fetch(url, fetchConfig);
         console.log(response)
         if (response.ok) {
-          const newSalePerson = await response.json();
-          console.log(newSalePerson);
+          const newSalesPerson = await response.json();
+          console.log(newSalesPerson);
           const cleared = {
             name:'',
             employee_number:'',
@@ -45,6 +45,7 @@ class Sales_PersonForm extends React.Component {
           this.setState(cleared)
     }
     }
+    
     render() {
         return (
           <div className="row">
@@ -68,7 +69,7 @@ class Sales_PersonForm extends React.Component {
             );
           }
         }
-        export default Sales_PersonForm;
+export default Sales_PersonForm;
         
     
 
