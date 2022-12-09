@@ -29,16 +29,17 @@ function Nav() {
           New Appointment
         </NavLink>
         <NavLink className="nav-link" to="/services/">
-          Appointments
+          Service Appointment List
+        </NavLink>
+
+        <NavLink className="nav-link" to="/services/history/">
+          Service History
         </NavLink>
 
         <NavLink className="nav-link" to="/technicians/new">
           Create Technician
         </NavLink>
 
-        <NavLink className="nav-link" to="/automobiles">
-          Automobile List
-        </NavLink>
         <NavLink className="nav-link" to="/employee_sales">
           Employee Sales List
         </NavLink>

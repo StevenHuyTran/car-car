@@ -6,7 +6,6 @@ class VehicleModelForm extends React.Component {
     this.state = {
       name: "",
       picture_url: "",
-      // manufacturer: "",
       manufacturers: [],
       newVehicle: false,
     };
@@ -45,7 +44,7 @@ class VehicleModelForm extends React.Component {
     const cleared = {
       name: "",
       picture_url: "",
-      manufacturers: "",
+      manufacturer_id: "",
       newVehicle: true,
     };
 
@@ -69,7 +68,7 @@ class VehicleModelForm extends React.Component {
   }
 
   async componentDidMount() {
-    const url = "http://localhost:8100/api/manufacturers";
+    const url = "http://localhost:8100/api/manufacturers/";
 
     const response = await fetch(url);
     if (response.ok) {
@@ -121,7 +120,7 @@ class VehicleModelForm extends React.Component {
               <div className="mb-3">
                 <select
                   onChange={this.handleManufacturerChange}
-                  value={this.state.manufacturer}
+                  value={this.state.manufacturer_id}
                   required
                   name="manufacturer"
                   id="manufacturer"
@@ -130,7 +129,7 @@ class VehicleModelForm extends React.Component {
                   <option value="">Choose a Manufacturer</option>
                   {this.state.manufacturers.map((manufacturer) => {
                     return (
-                      <option key={manufacturer.name} value={manufacturer.name}>
+                      <option key={manufacturer.id} value={manufacturer.id}>
                         {manufacturer.name}
                       </option>
                     );

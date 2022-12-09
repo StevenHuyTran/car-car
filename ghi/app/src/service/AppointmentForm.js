@@ -29,7 +29,8 @@ class AppointmentForm extends React.Component {
     delete data.models;
     delete data.newAutomobile;
 
-    const serviceUrl = "http://localhost:8100/api/services/";
+    // const serviceUrl = `http://localhost:8100/api/appointments/${data["auto_vin"]}/`;
+    const serviceUrl = "http://localhost:8100/api/appointments/";
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
@@ -88,8 +89,8 @@ class AppointmentForm extends React.Component {
 
   async componentDidMount() {
     //Retreiving technician list
-    const url = "http://localhost:8080/api/technicians";
-    techResponse = await fetch(url);
+    const url = "http://localhost:8080/api/technicians/";
+    const techResponse = await fetch(url);
 
     if (techResponse.ok) {
       const data = await techResponse.json();
@@ -98,7 +99,7 @@ class AppointmentForm extends React.Component {
     }
 
     const vinUrl = "http://localhost:8100/api/automobiles";
-    vinResponse = await fetch(vinUrl);
+    const vinResponse = await fetch(vinUrl);
 
     if (vinResponse.ok) {
       //Retreiving automobile list for vin data
@@ -120,7 +121,7 @@ class AppointmentForm extends React.Component {
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Create a new appointment</h1>
+            <h1>Create a New Service Appointment</h1>
             <form
               className={formClasses}
               onSubmit={this.handleSubmit}
@@ -204,13 +205,10 @@ class AppointmentForm extends React.Component {
                   id="technician"
                   className="form-select"
                 >
-                  <option value="">Assign Technician-Not working yet</option>
+                  <option value="">Assign Technician</option>
                   {this.state.technicians.map((technician) => {
                     return (
-                      <option
-                        key={technician.employee_number}
-                        value={technician.employee_number}
-                      >
+                      <option key={technician.name} value={technician.name}>
                         {technician.name}
                       </option>
                     );
