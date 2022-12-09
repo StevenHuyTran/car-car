@@ -6,6 +6,7 @@ class VehicleModelForm extends React.Component {
     this.state = {
       name: "",
       picture_url: "",
+      manufacturer_id: "",
       manufacturers: [],
       newVehicle: false,
     };
@@ -19,10 +20,7 @@ class VehicleModelForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault();
     const data = { ...this.state };
-    data.picture_url = data.pictureUrl;
-    delete data.pictureUrl;
     delete data.manufacturers;
-    delete data.manufacturer;
     delete data.newVehicle;
     console.log(data);
 
@@ -64,7 +62,7 @@ class VehicleModelForm extends React.Component {
 
   handleManufacturerChange(event) {
     const value = event.target.value;
-    this.setState({ manufacturer: value });
+    this.setState({ manufacturer_id: value });
   }
 
   async componentDidMount() {
@@ -108,14 +106,14 @@ class VehicleModelForm extends React.Component {
                 <input
                   onChange={this.handlePictureUrlChange}
                   value={this.state.picture_url}
-                  placeholder="pictureurl"
+                  placeholder="picture_url"
                   required
                   type="text"
-                  name="pictureurl"
-                  id="pictureurl"
+                  name="picture_url"
+                  id="picture_url"
                   className="form-control"
                 />
-                <label htmlFor="pictureurl">Picture URL</label>
+                <label htmlFor="picture_url">Picture URL</label>
               </div>
               <div className="mb-3">
                 <select

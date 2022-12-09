@@ -36,28 +36,16 @@ class AutomobileForm extends React.Component {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-      const newAutoData = await response.json();
-      console.log(newAutoData);
-      this.setState({
+      const cleared = {
         color: "",
         year: "",
         vin: "",
-        models: [],
         model: "",
         newAutomobile: true,
-      });
+      };
+      this.setState(cleared);
+      this.componentDidMount();
     }
-
-    // const cleared = {
-    //   color: "",
-    //   year: "",
-    //   vin: "",
-    //   model: "",
-    //   newAutomobile: true,
-    // };
-
-    // this.setState(cleared);
-    window.location.href = "/automobiles";
   }
 
   handleColorChange(event) {
@@ -90,12 +78,12 @@ class AutomobileForm extends React.Component {
   }
 
   render() {
-    let messageClasses = "alert alert-success d-none mb-0";
-    let formClasses = "";
-    if (this.state.newVehicle) {
-      messageClasses = "alert alert-success mb-0";
-      formClasses = "d-none";
-    }
+    // let messageClasses = "alert alert-success d-none mb-0";
+    // let formClasses = "";
+    // if (this.state.newVehicle) {
+    //   messageClasses = "alert alert-success mb-0";
+    //   formClasses = "d-none";
+    // }
 
     return (
       <div className="row">
@@ -123,7 +111,7 @@ class AutomobileForm extends React.Component {
                   value={this.state.year}
                   placeholder="year"
                   required
-                  type="text"
+                  type="number"
                   name="year"
                   id="year"
                   className="form-control"
@@ -168,9 +156,9 @@ class AutomobileForm extends React.Component {
             </form>
           </div>
         </div>
-        <div className={messageClasses} id="success-message">
+        {/* <div className={messageClasses} id="success-message">
           Successfully add automobile to inventory!
-        </div>
+        </div> */}
       </div>
     );
   }

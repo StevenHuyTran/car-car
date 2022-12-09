@@ -67,20 +67,30 @@ class ServiceHistoryList extends React.Component {
           </thead>
           <tbody>
             {this.state.appointments.map((appointment) => {
+              const dateObj = new Date(appointment.time);
+              const options = { timeStyle: "short" };
               return (
+                // <tr key={appointment.id}>
+                //   <td>{appointment.auto_vin}</td>
+                //   <td>{appointment.customer_name}</td>
+                //   <td>{new Date(appointment.time).toLocaleDateString()}</td>
+                //   <td>
+                //     {new Date(appointment.time).toLocaleDateString([], {
+                //       hour: "2-digit",
+                //       minute: "2-digit",
+                //     })}
+                //   </td>
+                //   <td>{appointment.technician}</td>
+                //   <td>{appointment.reason}</td>
+                //   <td>{appointment.vip ? "yes" : "no"}</td>
+                // </tr>
                 <tr key={appointment.id}>
                   <td>{appointment.auto_vin}</td>
                   <td>{appointment.customer_name}</td>
-                  <td>{new Date(appointment.time).toLocaleDateString()}</td>
-                  <td>
-                    {new Date(appointment.time).toLocaleDateString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </td>
-                  <td>{appointment.technician}</td>
+                  <td>{dateObj.toLocaleDateString()}</td>
+                  <td>{dateObj.toLocaleTimeString([], options)}</td>
+                  <td>{appointment.technician.name}</td>
                   <td>{appointment.reason}</td>
-                  <td>{appointment.vip ? "yes" : "no"}</td>
                 </tr>
               );
             })}
