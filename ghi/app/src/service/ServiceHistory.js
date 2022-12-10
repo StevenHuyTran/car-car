@@ -21,6 +21,7 @@ class ServiceHistoryList extends React.Component {
     //Loading Vin info
     const data = { ...this.state };
     const url = `http://localhost:8080/api/appointments/${data["vin"]}`;
+    // const url = "http://localhost:8080/api/appointments/";
     const response = await fetch(url);
 
     if (response.ok) {
@@ -70,20 +71,6 @@ class ServiceHistoryList extends React.Component {
               const dateObj = new Date(appointment.time);
               const options = { timeStyle: "short" };
               return (
-                // <tr key={appointment.id}>
-                //   <td>{appointment.auto_vin}</td>
-                //   <td>{appointment.customer_name}</td>
-                //   <td>{new Date(appointment.time).toLocaleDateString()}</td>
-                //   <td>
-                //     {new Date(appointment.time).toLocaleDateString([], {
-                //       hour: "2-digit",
-                //       minute: "2-digit",
-                //     })}
-                //   </td>
-                //   <td>{appointment.technician}</td>
-                //   <td>{appointment.reason}</td>
-                //   <td>{appointment.vip ? "yes" : "no"}</td>
-                // </tr>
                 <tr key={appointment.id}>
                   <td>{appointment.auto_vin}</td>
                   <td>{appointment.customer_name}</td>

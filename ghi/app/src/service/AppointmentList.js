@@ -6,6 +6,38 @@ class AppointmentList extends React.Component {
     this.state = {
       appointments: [],
     };
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleFinish = this.handleFinish.bind(this);
+  }
+
+  async handleCancel(event) {
+    const value = event.target.value;
+    const appointmentUrl = `http://localhost:8080/api/appointments/edit/${value}/`;
+    const fetchConfig = {
+      method: "delete",
+    };
+
+    const response = await fetch(appointmentUrl, fetchConfig);
+    const appointmentDeleted = await response.json();
+    console.log(appointmentDeleted);
+    if (response.ok) {
+      this.componentDidMount();
+    }
+  }
+
+  async handleFinish(event) {
+    const value = event.target.value;
+    const appointmentUrl = `http://localhost:8080/api/appointments/edit/${value}/`;
+    const fetchConfig = {
+      method: "put",
+    };
+
+    const response = await fetch(appointmentUrl, fetchConfig);
+    const appointmentFinished = await response.json();
+    console.log(appointmentFinished);
+    if (response.ok) {
+      this.componentDidMount();
+    }
   }
 
   async componentDidMount() {
@@ -21,30 +53,30 @@ class AppointmentList extends React.Component {
     }
   }
 
-  async handleClick(event) {
-    event.preventDefault();
-    const statusInput = event.target.value;
-    const serviceId = event.target.name;
-    const data = { status: statusInput };
-    const body = JSON.stringify(data);
+  // async handleClick(event) {
+  //   event.preventDefault();
+  //   const statusInput = event.target.value;
+  //   const serviceId = event.target.name;
+  //   const data = { status: statusInput };
+  //   const body = JSON.stringify(data);
 
-    const url = `http://localhost:8080/api/services/${serviceId}/`;
-    const fetchConfig = {
-      method: "put",
-      body: body,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+  //   const url = `http://localhost:8080/api/services/${serviceId}/`;
+  //   const fetchConfig = {
+  //     method: "put",
+  //     body: body,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
 
-    const response = await fetch(url, fetchConfig);
+  //   const response = await fetch(url, fetchConfig);
 
-    if (response.ok) {
-      const updatedService = await response.json();
-      console.log(updatedService);
-      window.location.reload();
-    }
-  }
+  //   if (response.ok) {
+  //     const updatedService = await response.json();
+  //     console.log(updatedService);
+  //     window.location.reload();
+  //   }
+  // }
 
   render() {
     return (
@@ -54,7 +86,7 @@ class AppointmentList extends React.Component {
             <div></div>
           </div>
           <div className="col-10">
-            <h1>Appointment List</h1>
+            <h1>Service Appointments</h1>
             <table className="table table-striped">
               <thead>
                 <tr>
@@ -78,6 +110,24 @@ class AppointmentList extends React.Component {
                       <td>{dateObj.toLocaleTimeString([], options)}</td>
                       <td>{appointment.technician.name}</td>
                       <td>{appointment.reason}</td>
+                      <td>
+                        <button
+                          className="btn btn-danger"
+                          onClick={this.handleCancel}
+                          value={appointment.id}
+                        >
+                          Cancel
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-success"
+                          onClick={this.handleFinish}
+                          value={appointment.id}
+                        >
+                          Finished
+                        </button>
+                      </td>
                     </tr>
                   );
                 })}

@@ -15,7 +15,8 @@ class Appointment(models.Model):
     customer_name = models.CharField(max_length=200)
     time = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
     reason = models.CharField(max_length=300)
-    # status = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
+    canceled = models.BooleanField(default=False)
     vip = models.BooleanField(default=False)
 
     technician = models.ForeignKey(
@@ -29,6 +30,14 @@ class Appointment(models.Model):
 
     def finish(self):
         return (f"{self.reason} for {self.customer_name}")
+
+    def complete(self):
+        self.completed = True
+        self.save()
+
+    def cancel(self):
+        self.completed = True
+        self.save()
 
 
 class AutomobileVO(models.Model):
