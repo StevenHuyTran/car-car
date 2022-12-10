@@ -8,7 +8,7 @@ Team:
 ## Design
 
 ## Step by step installation and getting started
-1. Fork the repository 
+1. Fork the repository https://gitlab.com/elviza/project-beta
 2. Select clone with HTTPS, and copy the link
 3. Clone the repo using Terminal: git clone "repo-link"
 4. Change your directory to the newly cloned repo: cd "repo-name"
