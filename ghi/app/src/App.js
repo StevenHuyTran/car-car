@@ -13,6 +13,8 @@ import AutomobileList from "./inventory/AutomobileList";
 import EmployeeSalesList from "./sales/EmployeeSalesList";
 import Potential_CustomerForm from "./sales/Potential_CustomerForm";
 import Sale_RecordForm from "./sales/Sale_RecordForm";
+import Sales_PersonForm from "./sales/Sales_PersonForm";
+import SalesList from "./sales/SalesList";
 import ServiceHistoryList from "./service/ServiceHistory";
 
 function App() {
@@ -53,6 +55,10 @@ function App() {
             element={<Potential_CustomerForm />}
           />
           <Route path="/sales/sale_record" element={<Sale_RecordForm />} />
+            <Route path="/sales/sales_list" element={< SalesList />} />
+            <Route path="sales">
+            <Route path="create" element={ <Sales_PersonForm />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -4,11 +4,13 @@ class Sale_RecordForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            automobile: "",
+            vin: "",
             automobiles: [],
-            sales_person: [],
-            customer: [],
-            price: ""
+            salesPerson: [],
+            potentialCustomers: [],
+            customer: "",
+            price: "",
+            sales_person: ""
         }
         this.handleAutomobileChange = this.handleAutomobileChange.bind(this);
         this.handleSalesPersonChange = this.handleSalesPersonChange.bind(this);
@@ -16,21 +18,10 @@ class Sale_RecordForm extends React.Component {
         this.handlePriceChange = this.handlePriceChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    async loadAutomobiles() {
-        const response = await fetch('http://localhost:8000/api/automobiles');
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data)
-          this.setState({
-            automobile: data
-          })
-        } else {
-          console.error(response);
-        }
-    }
+  
     handleAutomobileChange(event){
         const value = event.target.value
-        this.setState({ automobile: value});
+        this.setState({ vin: value});
     }
     
     handleSalesPersonChange(event){
@@ -52,6 +43,15 @@ class Sale_RecordForm extends React.Component {
         event.preventDefault();
         const data = {...this.state};
         console.log(data)
+      
+      
+        delete data.potentialCustomers
+      
+        delete data.automobiles
+        
+        delete data.salesPerson
+
+        // console.log(data)
         const url = "http://localhost:8090/api/sales/sale_record"; 
         const fetchConfig = {
             method: "post",
@@ -59,23 +59,116 @@ class Sale_RecordForm extends React.Component {
             headers: {
               'Content-Type': 'application/json',
             },
-        }
+        };
+        console.log(data)
         const response = await fetch(url, fetchConfig);
-        console.log(response)
+        // console.log(response)
         if (response.ok) {
           const newSaleRecord = await response.json();
-          console.log(newSaleRecord);
+        
+          // console.log(newSaleRecord);
           const cleared = {
-            automobile: [],
-            sales_person: [],
-            customer: [],
+            vin: '',
+            sales_person: '',
+            customer: '',
             price: '',
         }
           this.setState(cleared)
-    }
-    }
-    componentDidMount(){
-        this.loadAutomobiles()
+        }
+    };
+
+// import React from "react";
+
+// class Sale_RecordForm extends React.Component {
+
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       price: '',
+//       salesPerson: [],
+//       potentialCustomer: [],
+//       automobiles: []
+//     };
+
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//     this.handlePriceChange = this.handlePriceChange.bind(this);
+//     this.handleSalesPersonChange = this.handleSalesPersonChange.bind(this);
+//     this.handlePotentialCustomerChange = this.handlePotentialCustomerChange.bind(this);
+//     this.handleAutomobileChange = this.handleAutomobileChange.bind(this);
+//   }
+
+//   async handleSubmit(event) {
+//     event.preventDefault();
+//     const data = { ...this.state };
+//     data.sales_person = data.salesPerson;
+//     data.potential_customer = data.potentialCustomer;
+//     delete data.price;
+//     delete data.automobile;
+//     delete data.salesPerson;
+//     delete data.potentialCustomer;
+//     delete data.salesPersons;
+//     delete data.potentialCustomers;
+//     delete data.automobiles;
+//     console.log("Submit data: ", data);
+
+//     const postUrl = 'http://localhost:8090/api/sales/sales_list';
+//     const fetchConfig = {
+//       method: "post",
+//       body: JSON.stringify(data),
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     };
+
+//     const response = await fetch(postUrl, fetchConfig);
+//     if (response.ok) {
+//       const newSale = await response.json();
+//       console.log("New Sale: ", newSale);
+//     }
+
+//     const cleared = {
+//       price: '',
+//       salesPerson: '',
+//       potentialCustomer: '',
+//       automobile: '',
+//     };
+
+//     this.setState(cleared);
+
+//   }
+
+//   handlePriceChange(event) {
+//     const value = event.target.value;
+//     this.setState({ price: value })
+//   }
+
+//   handleSalesPersonChange(event) {
+//     const value = event.target.value;
+//     this.setState({ salesPerson: value })
+//   }
+
+//   handlePotentialCustomerChange(event) {
+//     const value = event.target.value;
+//     this.setState({ potentialCustomer: value })
+//   }
+
+//   handleAutomobileChange(event) {
+//     const value = event.target.value;
+//     this.setState({ automobile: value })
+//   }
+    async componentDidMount() {
+        const url1 = 'http://localhost:8100/api/automobiles/';
+        const url2 = 'http://localhost:8090/api/sales/';
+        const url3 = 'http://localhost:8090/api/sales/potential_customer';
+        const response1 = await fetch(url1);
+        const response2 = await fetch(url2);
+        const response3 = await fetch(url3);
+        if (response1.ok && response2.ok && response3.ok) {
+          const data1 = await response1.json();
+          const data2 = await response2.json();
+          const data3 = await response3.json();
+          this.setState({automobiles: data1.autos, salesPerson: data2.sales_person, potentialCustomers: data3.potential_customer})
+      }    
     }
 
     render() {
@@ -88,37 +181,37 @@ class Sale_RecordForm extends React.Component {
                     <div className="form-floating mb-3">
                       <select onChange = {this.handleAutomobileChange} value={this.state.vin} required name="vin" id="vin" className="form-select">
                           <option value="">Choose an automobile</option>
-                          {console.log(this)}
-                          {this.state.automobiles.map(automobiles => {
+                          {/* {console.log(this)} */}
+                          {this.state.automobiles.map(automobile => {
                               return (
-                                  <option key = {automobiles.id} value = {automobiles.id}>
-                                      {automobiles.vin}
+                                  <option key = {automobile.id} value = {automobile.vin}>
+                                      {automobile.vin}
                               </option>
                           )
                       })}
                       </select>
                     </div>          
                 <div className="form-floating mb-3">
-                      <select onChange = {this.handleSalesPersonChange} value={this.state.name} required name="name" id="name" className="form-select">
+                      <select onChange = {this.handleSalesPersonChange} value={this.state.sales_person} required name="sales_person" id="sales_person" className="form-select">
                           <option value="">Choose a sales person</option>
                           {console.log(this)}
-                          {this.state.sales_person.map(sales_person => {
+                          {this.state.salesPerson.map(salesPersons => {
                               return (
-                                  <option key = {sales_person.id} value = {sales_person.id}>
-                                      {sales_person.name}
+                                  <option key = {salesPersons.id} value = {salesPersons.id}>
+                                      {salesPersons.name}
                               </option>
                           )
                       })}
                       </select>
                     </div> 
                 <div className="form-floating mb-3">
-                      <select onChange = {this.handleCustomerChange} value={this.state.name} required name="name" id="name" className="form-select">
+                      <select onChange = {this.handleCustomerChange} value={this.state.customer} required name="customer" id="customer" className="form-select">
                           <option value="">Choose a customer</option>
-                          {console.log(this)}
-                          {this.state.customer.map(customer => {
+                          {/* {console.log(this)} */}
+                          {this.state.potentialCustomers.map(potentialCustomer => {
                               return (
-                                  <option key = {customer.id} value = {customer.id}>
-                                      {customer.name}
+                                  <option key = {potentialCustomer.id} value = {potentialCustomer.id}>
+                                      {potentialCustomer.name}
                               </option>
                           )
                       })}
@@ -136,6 +229,6 @@ class Sale_RecordForm extends React.Component {
           );
         }
       }
-      export default Sale_RecordForm;
+export default Sale_RecordForm;
       
     

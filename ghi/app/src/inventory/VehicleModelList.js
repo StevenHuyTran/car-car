@@ -44,11 +44,12 @@ class VehicleModelList extends React.Component {
                   </td>
                   <td>{model.manufacturer.name}</td>
                 </tr>
+                
               );
             })}
           </tbody>
         </table>
-      </>
+        </>
     );
   }
 }

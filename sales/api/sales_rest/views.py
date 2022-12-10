@@ -137,11 +137,19 @@ def api_sale_record(request):
         return JsonResponse(
             {'sale_record': sale_record},
             encoder=SaleRecordEncoder,
+            safe=False,
         )
 
     else:
         try:
             content = json.loads(request.body)
+            automobile = AutomobileVO.objects.get(vin = content["vin"])
+            content["automobile"]= automobile
+            sales_person = SalesPerson.objects.get(id = content["sales_person"])
+            content["sales_person"] = sales_person
+            customer = PotentialCustomer.objects.get(id = content["customer"])
+            content["customer"] = customer
+            del content["vin"]
             sale_record = SaleRecord.objects.create(**content)
             return JsonResponse(
                     sale_record,
@@ -154,7 +162,7 @@ def api_sale_record(request):
                 status=400,
             )
 
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def api_sales_list(request):
     if request.method == "GET":
         sales_list = SaleRecord.objects.all()
@@ -162,16 +170,17 @@ def api_sales_list(request):
             {"sales": sales_list },
             encoder = SaleRecordEncoder, 
         )
-    else:
-        content = json.loads(request.body) 
-        automobile = AutomobileVO.objects.get(vin = content["vin"])
-        content["automobile"] = automobile 
+    # else:
+    #     content = json.loads(request.body) 
+    #     automobile = AutomobileVO.objects.get(vin = content["vin"])
+    #     content["automobile"] = automobile
+    #     del content["vin"]
 
-    return JsonResponse(
-        sales_list,
-        encoder=SalesListEncoder, 
-        safe=False,
-    )
+    # return JsonResponse(
+    #     sales_list,
+    #     encoder=SalesListEncoder, 
+    #     safe=False,
+    # )
 
 @require_http_methods(["GET", "POST"])
 def api_employee_sales_list(request):
