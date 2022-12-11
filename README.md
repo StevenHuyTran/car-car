@@ -46,10 +46,71 @@ the list or mark the appointment as "finished" and move it to the service histor
 
 The models are currently set up in a way that allows the back-end to delete a technician either through Insomnia or the admin page. Once a technician is deleted, appointments associated to that technician will be deleted because appointments depend on the technicians available.
 
-## Restful API endpoints for the service API
+
+## Endpoints for Service API
+```
+Base url: http://localhost:8080/
+```
+
+
 | Action | Method | URL |
 | ---    | ---    | --- |
 | List Appointments| GET | api/appointments/ |
+| Create Appointment | POST | api/appointments/ |
+| Appointment by VIN | GET | api/appointments/<str:vin>/
+| Appointment Detail | GET | api/appointments/edit/<int:pk>/|
+| Complete Appointment | PUT | api/appointments/edit/<int:pk>/ |
+| Cancel Appointment | PUT | api/appointments/<int:pk>/cancel/ |
+| Create Technician | POST | api/technicians/ |
+| List Technicians | GET | api/technicians/ |
+| Delete Technician | DELETE | api/technicians/<int:pk> |
+
+
+## JSON body samples for Post Requests
+<b>Creating an appointment:
+
+```
+{
+	"auto_vin": "1FDLF47M6RRA05066",
+	"customer_name": "Bill",
+	"time": "2022-12-08T07:23:48+00:00",
+	"reason": "Wheel change",
+	"technician": 2
+}
+```
+<b>Response for creating an appointment
+```
+{
+	"id": 8,
+	"auto_vin": "1FDLF47M6RRA05066",
+	"customer_name": "Bill",
+	"time": "2022-12-08T07:23:48+00:00",
+	"reason": "Wheel change",
+	"technician": {
+		"id": 2,
+		"name": "Amy",
+		"employee_number": 2
+	}
+}
+```
+<b>Creating a Technician
+```
+{
+"name": "Paul",
+"employee_number": 1
+}
+```
+<b>Response for creating a technician
+```
+{
+	"name": "Carl",
+	"employee_number": 1
+}
+```
+
+
+
+
 
 
 ## Sales microservice
