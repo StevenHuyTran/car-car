@@ -25,7 +25,7 @@ Team:
 
 ## Application Diagram
 
-![Diagram](images/path/to/folder/CarCar Overview Diagram.png)
+![Diagram](https://gitlab.com/elviza/project-beta/-/raw/steven/source/images/CarCar%20Overview%20Diagram.png)
 
 ## Service microservice
 
