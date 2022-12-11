@@ -55,7 +55,7 @@ class ServiceHistoryList extends React.Component {
             className="btn btn-outline-secondary"
             type="button"
           >
-            Search VIN
+            List All VINs
           </button>
         </div>
         <h1>Service History</h1>
