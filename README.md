@@ -23,6 +23,10 @@ Team:
 8. Once docker is up and running, go to http://localhost:3000/ to
    see the web app.
 
+
+## Application Diagram
+
+
 ## Service microservice
 
 Explain your models and integration with the inventory
