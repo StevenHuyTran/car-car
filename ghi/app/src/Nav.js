@@ -15,15 +15,11 @@ function Nav() {
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            color="8F1D79"
           >
             Inventory
           </a>
           <ul className="dropdown-menu">
-            <li>
-              <NavLink className="nav-item dropdown-item" to="/manufacturers">
-                Manufacturers List
-              </NavLink>
-            </li>
             <li>
               <NavLink
                 className="nav-item dropdown-item"
@@ -33,8 +29,23 @@ function Nav() {
               </NavLink>
             </li>
             <li>
+              <NavLink className="nav-item dropdown-item" to="/models/new">
+                Add Model
+              </NavLink>
+            </li>
+            <li>
               <NavLink className="nav-item dropdown-item" to="/automobiles/new">
-                New Automobile
+                Add Automobile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="nav-item dropdown-item" to="/manufacturers">
+                Manufacturers List
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="nav-item dropdown-item" to="/models">
+                Model List
               </NavLink>
             </li>
             <li>
@@ -42,16 +53,6 @@ function Nav() {
                 Automobile List
               </NavLink>
             </li>
-            <li>
-              <NavLink className="nav-item dropdown-item" to="/models">
-                Vehicle Models
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="nav-item dropdown-item" to="/models/new">
-                New Vehicle Model
-              </NavLink>
-            </li>
           </ul>
         </li>
 
@@ -62,21 +63,23 @@ function Nav() {
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            color="8F1D79"
           >
             Service
           </a>
 
           <ul className="dropdown-menu">
             <li>
-              <NavLink className="nav-item dropdown-item" to="/services/">
-                Appointments
-              </NavLink>
-            </li>
-            <li>
               <NavLink className="nav-link" to="/services/new">
                 New Appointment
               </NavLink>
             </li>
+            <li>
+              <NavLink className="nav-item dropdown-item" to="/services/">
+                Service Appointments
+              </NavLink>
+            </li>
+
             <li>
               <NavLink className="nav-link" to="/services/history">
                 Service History
@@ -84,7 +87,7 @@ function Nav() {
             </li>
             <li>
               <NavLink className="nav-link" to="/technicians/new">
-                Create Technician
+                Add Technician
               </NavLink>
             </li>
           </ul>
@@ -97,6 +100,7 @@ function Nav() {
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            color="8F1D79"
           >
             Sales
           </a>

@@ -128,16 +128,16 @@ def api_cancel_appointment(request, pk):
 
 @require_http_methods(["GET"])
 def api_appointments_with_vin(request, vin):
-    appointments = Appointment.objects.filter(auto_vin=vin)
+    appointments = Appointment.objects.filter(auto_vin__icontains=vin)
     if len(appointments) > 0:
         return JsonResponse(
-            appointments,
+        {"appointments": appointments},
             encoder=AppointmentEncoder,
             safe=False,
         )
     else:
         response = JsonResponse(
-            {"message" "VIN does not exist"}
+            {"message": "VIN does not exist"}
         )
         response.status_code = 404
         return response

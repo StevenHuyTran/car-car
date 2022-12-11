@@ -111,26 +111,6 @@ class AppointmentList extends React.Component {
                       <td>{appointment.technician.name}</td>
                       <td>{appointment.reason}</td>
                       <td>
-                      <div className="btn-group" role="group">
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          onClick={this.handleCancel}
-                          value={appointment.id}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-success"
-                          onClick={this.handleFinish}
-                          value={appointment.id}
-                        >
-                          Finished
-                        </button>
-                      </div>
-                      </td>
-                      {/* <td>
                         <button
                           className="btn btn-danger"
                           onClick={this.handleCancel}
@@ -147,10 +127,17 @@ class AppointmentList extends React.Component {
                         >
                           Finished
                         </button>
-                      </td> */}
+                      </td>
                     </tr>
                   );
                 })}
+                {/* <tr>
+                    <td>
+                      <button type="button" className="btn btn-danger">
+                        Cancel
+                      </button>
+                    </td>
+                  </tr> */}
               </tbody>
             </table>
           </div>

@@ -56,7 +56,7 @@ class AppointmentForm extends React.Component {
         technician: "",
       };
       this.setState(cleared);
-      // window.location.href = "/appointments";
+      window.location.href = "/services";
     }
   }
 
@@ -134,6 +134,7 @@ class AppointmentForm extends React.Component {
                 <input
                   value={this.state.vin}
                   onChange={this.handleVinChange}
+                  maxLength="17"
                   placeholder="vin"
                   required
                   type="text"
