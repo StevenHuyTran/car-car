@@ -129,8 +129,8 @@ function Nav() {
             </li>
 
             <li>
-              <NavLink className="nav-link" to="/sales/create">
-                Sales Person Form
+              <NavLink className="nav-link" to="/sales/sales_list">
+                All Sales
               </NavLink>
             </li>
           </ul>

@@ -58,6 +58,7 @@ function App() {
             <Route path="/sales/sales_list" element={< SalesList />} />
             <Route path="sales">
             <Route path="create" element={ <Sales_PersonForm />} />
+
           </Route>
         </Routes>
       </div>

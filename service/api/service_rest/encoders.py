@@ -18,7 +18,7 @@ class AppointmentEncoder(ModelEncoder):
         "customer_name",
         "time",
         "reason",
-        # "vip",
+        "vip",
         "completed",
         "canceled",
         "technician",

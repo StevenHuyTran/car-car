@@ -83,6 +83,7 @@ class ServiceHistoryList extends React.Component {
                   <td>{dateObj.toLocaleTimeString([], options)}</td>
                   <td>{appointment.technician.name}</td>
                   <td>{appointment.reason}</td>
+                  <td>{appointment.vip ? "yes" : "no"}</td>
                 </tr>
               );
             })}
