@@ -24,7 +24,6 @@ class Sales_PersonForm extends React.Component {
     async handleSubmit(event){
         event.preventDefault();
         const data = {...this.state};
-        console.log(data)
         const url = "http://localhost:8090/api/sales/"; 
         const fetchConfig = {
             method: "post",
@@ -34,10 +33,8 @@ class Sales_PersonForm extends React.Component {
             },
         }
         const response = await fetch(url, fetchConfig);
-        console.log(response)
         if (response.ok) {
           const newSalesPerson = await response.json();
-          console.log(newSalesPerson);
           const cleared = {
             name:'',
             employee_number:'',

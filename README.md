@@ -14,9 +14,10 @@ Team:
 3. Clone the repo using Terminal: git clone "repo-link"
 4. Change your directory to the newly cloned repo: cd "repo-name"
 5. To open project in VSCODE : code .
-6. Run : docker volume create pgdata
-   docker-compose build
-   docker-compose up
+6. Run : 
+         docker volume create beta-data
+         docker-compose build
+         docker-compose up
 7. If you run docker-compose up and if you're on macOS, you'll see
    a warning about an
    environment variable named OS being missing. You can safely ignore this.
@@ -115,5 +116,58 @@ Base url: http://localhost:8080/
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+The Sales functionality needs to keep track of automobile sales that come from the inventory. Currently the following fron-end portion of sales microservice working (you can access it through navigation bar "Sales"):
+ - Add a sales person
+ - Add potential customer
+ - Create a sale record
+ - All sales record
+ - List of sales (ables to sort by sales person)
+
+## Endpoints for Sales API
+
+```
+Base url: http://localhost:8090/
+```
+
+| Action               | Method | URL                               |
+| -------------------- | ------ | --------------------------------- |
+| List Sales           | GET    | api/sales/sales_list              |
+| Create Sale Record   | POST   | api/sales/sale_record             |
+| View Sale Record     | GET    | api/sales/sale_record             |
+| Create customer      | POST   | api/sales/potential_customer      |
+| View customer list   | GET    | api/sales/potential_customer      |
+| Create Sales Person  | POST   | api/api/sales/                    |
+| View Sales Person    | GET    | api/api/sales/                    |
+
+## JSON body samples for Post Requests
+
+- Create Sales Record
+
+```
+{
+	"vin": "1FDLF47M6RRA05066",
+	"sales_person": 1,
+	"customer": 1,
+	"price": 25000
+}
+
+```
+- Create Customer
+
+```
+{
+	"name": "Elena",
+	"address": "1234 NE 11th Ave, Seattle WA ",
+	"phone_number": 2147483647
+}
+
+```
+- Create Sales Person
+
+```
+{
+	"name": "Nick",
+	"employee_number": 1
+}
+
+```

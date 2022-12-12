@@ -107,24 +107,24 @@ function Nav() {
           <ul className="dropdown-menu">
             <li>
               <NavLink className="nav-link" to="/employee_sales">
-                Employee Sales List
+                Sales person history
               </NavLink>
             </li>
 
             <li>
               <NavLink className="nav-link" to="/sales/create">
-                Sales Person Form
+                Add a sales person
               </NavLink>
             </li>
             <li>
               <NavLink className="nav-link" to="/sales/potential_customer">
-                Potential Customer
+                Add Customer
               </NavLink>
             </li>
 
             <li>
               <NavLink className="nav-link" to="/sales/sale_record">
-                Sale Record
+                Record a new sale
               </NavLink>
             </li>
 
