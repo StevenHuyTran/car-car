@@ -31,6 +31,8 @@ class ManufacturerForm extends React.Component {
     const response = await fetch(ManufacturerUrl, fetchConfig);
     if (response.ok) {
       const NewManufacturer = await response.json();
+      const alert = document.getElementById("success-message");
+      alert.classList.remove("d-none");
       const cleared = {
         name: "",
       };
@@ -59,6 +61,13 @@ class ManufacturerForm extends React.Component {
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
+            <p></p>
+            <div
+              className="alert alert-success d-none alert-dismissible fade show"
+              id="success-message"
+            >
+              Successfully added a manufacturer!
+            </div>
           </div>
         </div>
       </div>
