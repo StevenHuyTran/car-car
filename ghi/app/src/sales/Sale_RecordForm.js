@@ -49,11 +49,11 @@ class Sale_RecordForm extends React.Component {
     };
     console.log(data);
 
-    // delete data.potentialCustomers
+    // delete data.potentialCustomers;
 
-    // delete data.automobiles
+    // delete data.automobiles;
 
-    //delete data.salesPerson
+    // delete data.salesPerson;
 
     // console.log(data)
     const url = "http://localhost:8090/api/sales/sale_record";
@@ -81,85 +81,6 @@ class Sale_RecordForm extends React.Component {
     }
   }
 
-  // import React from "react";
-
-  // class Sale_RecordForm extends React.Component {
-
-  //   constructor(props) {
-  //     super(props)
-  //     this.state = {
-  //       price: '',
-  //       salesPerson: [],
-  //       potentialCustomer: [],
-  //       automobiles: []
-  //     };
-
-  //     this.handleSubmit = this.handleSubmit.bind(this);
-  //     this.handlePriceChange = this.handlePriceChange.bind(this);
-  //     this.handleSalesPersonChange = this.handleSalesPersonChange.bind(this);
-  //     this.handlePotentialCustomerChange = this.handlePotentialCustomerChange.bind(this);
-  //     this.handleAutomobileChange = this.handleAutomobileChange.bind(this);
-  //   }
-
-  //   async handleSubmit(event) {
-  //     event.preventDefault();
-  //     const data = { ...this.state };
-  //     data.sales_person = data.salesPerson;
-  //     data.potential_customer = data.potentialCustomer;
-  //     delete data.price;
-  //     delete data.automobile;
-  //     delete data.salesPerson;
-  //     delete data.potentialCustomer;
-  //     delete data.salesPersons;
-  //     delete data.potentialCustomers;
-  //     delete data.automobiles;
-  //     console.log("Submit data: ", data);
-
-  //     const postUrl = 'http://localhost:8090/api/sales/sales_list';
-  //     const fetchConfig = {
-  //       method: "post",
-  //       body: JSON.stringify(data),
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     };
-
-  //     const response = await fetch(postUrl, fetchConfig);
-  //     if (response.ok) {
-  //       const newSale = await response.json();
-  //       console.log("New Sale: ", newSale);
-  //     }
-
-  //     const cleared = {
-  //       price: '',
-  //       salesPerson: '',
-  //       potentialCustomer: '',
-  //       automobile: '',
-  //     };
-
-  //     this.setState(cleared);
-
-  //   }
-
-  //   handlePriceChange(event) {
-  //     const value = event.target.value;
-  //     this.setState({ price: value })
-  //   }
-
-  //   handleSalesPersonChange(event) {
-  //     const value = event.target.value;
-  //     this.setState({ salesPerson: value })
-  //   }
-
-  //   handlePotentialCustomerChange(event) {
-  //     const value = event.target.value;
-  //     this.setState({ potentialCustomer: value })
-  //   }
-
-  //   handleAutomobileChange(event) {
-  //     const value = event.target.value;
-  //     this.setState({ automobile: value })
-  //   }
   async componentDidMount() {
     const url1 = "http://localhost:8100/api/automobiles/";
     const url2 = "http://localhost:8090/api/sales/";
@@ -212,6 +133,7 @@ class Sale_RecordForm extends React.Component {
                   value={this.state.sales_person}
                   required
                   name="sales_person"
+                  type="number"
                   id="sales_person"
                   className="form-select"
                 >
@@ -232,6 +154,7 @@ class Sale_RecordForm extends React.Component {
                   value={this.state.customer}
                   required
                   name="customer"
+                  type="number"
                   id="customer"
                   className="form-select"
                 >

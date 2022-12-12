@@ -37,6 +37,7 @@ class VehicleModelForm extends React.Component {
     if (response.ok) {
       const newVehicle = await response.json();
       console.log(newVehicle);
+      this.componentDidMount();
     }
 
     const cleared = {
@@ -47,7 +48,6 @@ class VehicleModelForm extends React.Component {
     };
 
     this.setState(cleared);
-    // window.location.href = "/models";
   }
 
   handleNameChange(event) {
@@ -76,12 +76,18 @@ class VehicleModelForm extends React.Component {
   }
 
   render() {
-    // let messageClasses = "alert alert-success d-none mb-0";
-    // let formClasses = "";
-    // if (this.state.newVehicle) {
-    //   messageClasses = "alert alert-success mb-0";
-    //   formClasses = "d-none";
-    // }
+    let messageClasses = "alert alert-success d-none mb-0";
+    let formClasses = "";
+    if (this.state.newVehicle === true) {
+      messageClasses = "alert alert-success alert-dismissible fade show";
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      ></button>;
+      formClasses = "d-none";
+    }
 
     return (
       <div className="row">
@@ -136,9 +142,10 @@ class VehicleModelForm extends React.Component {
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
-            {/* <div className={messageClasses} id="success-message">
-              New Vehicle Created!
-            </div> */}
+          </div>
+          <p></p>
+          <div className={messageClasses} id="success-message">
+            New Vehicle Created!
           </div>
         </div>
       </div>

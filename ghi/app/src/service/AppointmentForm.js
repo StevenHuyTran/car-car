@@ -58,15 +58,6 @@ class AppointmentForm extends React.Component {
       this.setState(cleared);
       window.location.href = "/services";
     }
-
-    // new code to implement vip. Sends PUT request to Service API to set VIP to True
-    // const vipUrl = `http://localhost:8080/api/appointments/${data.}`
-
-
-
-
-
-
   }
 
   handleVinChange(event) {
@@ -100,7 +91,6 @@ class AppointmentForm extends React.Component {
   }
 
   async componentDidMount() {
-    //Retreiving technician list
     const url = "http://localhost:8080/api/technicians/";
     const techResponse = await fetch(url);
 
@@ -114,7 +104,6 @@ class AppointmentForm extends React.Component {
     const vinResponse = await fetch(vinUrl);
 
     if (vinResponse.ok) {
-      //Retreiving automobile list for vin data
       const data = await vinResponse.json();
       console.log(data);
       this.setState({ auto_vin: data.auto_vin });

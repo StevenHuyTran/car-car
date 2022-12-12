@@ -93,7 +93,7 @@ def api_appointment_detail(request, pk):
                 safe=False,
             )
         except Appointment.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
+            response = JsonResponse({"message": "Appointment by VIN does not exist"})
             response.status_code = 404
             return response
     elif request.method =="PUT":
@@ -105,7 +105,7 @@ def api_appointment_detail(request, pk):
                 "finished": "Appointment complete"
             })
         except Appointment.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
+            response = JsonResponse({"message": "Appointment by VIN does not exist"})
             response.status_code = 404
             return response
     else:

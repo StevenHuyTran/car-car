@@ -13,8 +13,9 @@ class ServiceHistoryList extends React.Component {
 
   handleVinChange(event) {
     const value = event.target.value;
-    this.setState({ vin: value });
-    this.handleVinSearch();
+    this.setState({ vin: value }, () => {
+      this.handleVinSearch();
+    });
   }
 
   async handleVinSearch(event) {
@@ -28,15 +29,16 @@ class ServiceHistoryList extends React.Component {
 
     if (response.ok) {
       const data = await response.json();
-      this.setState({ appointments: data.appointments });
+      await this.setState({ appointments: data.appointments });
     } else {
       this.setState({ appointments: [] });
     }
   }
 
   render() {
-    if (this.state.appointments === []) {
-    }
+    // if (this.state.appointments === []) {
+    // }
+
     return (
       <div className="container">
         <br></br>
@@ -72,11 +74,15 @@ class ServiceHistoryList extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.appointments.map((appointment) => {
+            {this.state.appointments.map((appointment, i) => {
+              let isComplete = "";
+              if (appointment.completed === false) {
+                isComplete = "d-none";
+              }
               const dateObj = new Date(appointment.time);
               const options = { timeStyle: "short" };
               return (
-                <tr key={appointment.id}>
+                <tr className={isComplete} key={appointment.id}>
                   <td>{appointment.auto_vin}</td>
                   <td>{appointment.customer_name}</td>
                   <td>{dateObj.toLocaleDateString()}</td>

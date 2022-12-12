@@ -80,12 +80,12 @@ class AutomobileForm extends React.Component {
   }
 
   render() {
-    // let messageClasses = "alert alert-success d-none mb-0";
-    // let formClasses = "";
-    // if (this.state.newVehicle) {
-    //   messageClasses = "alert alert-success mb-0";
-    //   formClasses = "d-none";
-    // }
+    let messageClasses = "alert alert-success d-none mb-0";
+    let formClasses = "";
+    if (this.state.newAutomobile) {
+      messageClasses = "alert alert-success alert-dismissible mb-0";
+      formClasses = "d-none";
+    }
 
     return (
       <div className="row">
@@ -158,9 +158,10 @@ class AutomobileForm extends React.Component {
             </form>
           </div>
         </div>
-        {/* <div className={messageClasses} id="success-message">
-          Successfully add automobile to inventory!
-        </div> */}
+        <p></p>
+        <div className={messageClasses} id="success-message">
+          Successfully added automobile to inventory!
+        </div>
       </div>
     );
   }

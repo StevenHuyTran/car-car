@@ -24,7 +24,7 @@ class SalesPersonEncoder(ModelEncoder):
         "id",
         "name",
         "employee_number",
-   
+
     ]
 class PotentialCustomerEncoder(ModelEncoder):
     model = PotentialCustomer
@@ -53,10 +53,10 @@ class SaleRecordEncoder(ModelEncoder):
 class SalesListEncoder(ModelEncoder):
     model = SalesList
     properties = [
-        "id", 
-        "sales_person", 
-        "customer", 
-        "vin", 
+        "id",
+        "sales_person",
+        "customer",
+        "vin",
         "price",
     ]
     encoders = {
@@ -69,10 +69,10 @@ class SalesListEncoder(ModelEncoder):
 class EmployeeSalesListEncoder(ModelEncoder):
     model = EmployeeSalesList
     properties = [
-        "id", 
-        "sales_person", 
-        "customer", 
-        "vin", 
+        "id",
+        "sales_person",
+        "customer",
+        "vin",
         "price",
     ]
     encoders = {
@@ -141,26 +141,26 @@ def api_sale_record(request):
         )
 
     else:
-        try:
-            content = json.loads(request.body)
-            automobile = AutomobileVO.objects.get(vin = content["vin"])
-            content["automobile"]= automobile
-            sales_person = SalesPerson.objects.get(id = content["sales_person"])
-            content["sales_person"] = sales_person
-            customer = PotentialCustomer.objects.get(id = content["customer"])
-            content["customer"] = customer
-            del content["vin"]
-            sale_record = SaleRecord.objects.create(**content)
-            return JsonResponse(
-                    sale_record,
-                    encoder=SaleRecordEncoder,
-                    safe=False,
-                )
-        except:
-            return JsonResponse(
-                {'message': 'Could not create a sale record'},
-                status=400,
+        # try:
+        content = json.loads(request.body)
+        automobile = AutomobileVO.objects.get(vin = content["vin"])
+        content["automobile"]= automobile
+        sales_person = SalesPerson.objects.get(id = content["sales_person"])
+        content["sales_person"] = sales_person
+        customer = PotentialCustomer.objects.get(id = content["customer"])
+        content["customer"] = customer
+        del content["vin"]
+        sale_record = SaleRecord.objects.create(**content)
+        return JsonResponse(
+                sale_record,
+                encoder=SaleRecordEncoder,
+                safe=False,
             )
+        # except:
+        #     return JsonResponse(
+        #         {'message': 'Could not create a sale record'},
+        #         status=400,
+        #     )
 
 @require_http_methods(["GET"])
 def api_sales_list(request):
@@ -168,17 +168,17 @@ def api_sales_list(request):
         sales_list = SaleRecord.objects.all()
         return JsonResponse(
             {"sales": sales_list },
-            encoder = SaleRecordEncoder, 
+            encoder = SaleRecordEncoder,
         )
     # else:
-    #     content = json.loads(request.body) 
+    #     content = json.loads(request.body)
     #     automobile = AutomobileVO.objects.get(vin = content["vin"])
     #     content["automobile"] = automobile
     #     del content["vin"]
 
     # return JsonResponse(
     #     sales_list,
-    #     encoder=SalesListEncoder, 
+    #     encoder=SalesListEncoder,
     #     safe=False,
     # )
 
@@ -188,18 +188,15 @@ def api_employee_sales_list(request):
         employee_sales_list = EmployeeSalesList.objects.all()
         return JsonResponse(
             {"employee_sales": employee_sales_list },
-            encoder = EmployeeSalesListEncoder, 
+            encoder = EmployeeSalesListEncoder,
         )
     else:
-        content = json.loads(request.body) 
+        content = json.loads(request.body)
         automobile = AutomobileVO.objects.get(vin = content["vin"])
-        content["automobile"] = automobile 
+        content["automobile"] = automobile
 
     return JsonResponse(
         employee_sales_list,
-        encoder=EmployeeSalesListEncoder, 
+        encoder=EmployeeSalesListEncoder,
         safe=False,
     )
-
-
-

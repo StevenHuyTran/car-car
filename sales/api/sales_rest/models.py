@@ -8,6 +8,7 @@ class AutomobileVO(models.Model):
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
 
+
 class SalesPerson(models.Model):
     name = models.CharField(max_length=100)
     employee_number = models.PositiveIntegerField()
@@ -15,12 +16,12 @@ class SalesPerson(models.Model):
     def get_api_url(self):
         return reverse("api_sales_person", kwargs={"pk": self.id})
 
-class PotentialCustomer(models.Model): 
+class PotentialCustomer(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
-    phone_number = models.PositiveIntegerField()
+    phone_number = models.PositiveBigIntegerField()
 
-class SaleRecord(models.Model): 
+class SaleRecord(models.Model):
     automobile = models.ForeignKey(
         AutomobileVO,
         related_name="automobile",
@@ -70,7 +71,3 @@ class EmployeeSalesList(models.Model):
         SaleRecord,
         related_name="employee_sales_price",
         on_delete=models.PROTECT)
-
-
-
-

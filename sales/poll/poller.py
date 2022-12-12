@@ -21,6 +21,12 @@ def get_automobiles():
         for auto in content['autos']:
             AutomobileVO.objects.update_or_create(
                 vin=auto["vin"],
+                defaults={
+                    "vin": auto["vin"],
+                    "color": auto["color"],
+                    "year": auto["year"],
+                }
+
                 )
     except Exception as e:
         print(e)

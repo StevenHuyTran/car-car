@@ -6,8 +6,6 @@ class AppointmentList extends React.Component {
     this.state = {
       appointments: [],
     };
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleFinish = this.handleFinish.bind(this);
   }
 
   async handleCancel(event) {
@@ -25,11 +23,14 @@ class AppointmentList extends React.Component {
     }
   }
 
-  async handleFinish(event) {
-    const value = event.target.value;
-    const appointmentUrl = `http://localhost:8080/api/appointments/edit/${value}/`;
+  async handleFinish(id) {
+    const appointmentUrl = `http://localhost:8080/api/appointments/edit/${id}/`;
     const fetchConfig = {
       method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ completed: true }),
     };
 
     const response = await fetch(appointmentUrl, fetchConfig);
@@ -41,8 +42,6 @@ class AppointmentList extends React.Component {
   }
 
   async componentDidMount() {
-    // if this url loads, set the state of the
-    // appointment empty appointment list to reflect current appointments
     const url = "http://localhost:8080/api/appointments/";
     const response = await fetch(url);
     console.log(response);
@@ -52,31 +51,6 @@ class AppointmentList extends React.Component {
       this.setState({ appointments: data.appointments });
     }
   }
-
-  // async handleClick(event) {
-  //   event.preventDefault();
-  //   const statusInput = event.target.value;
-  //   const serviceId = event.target.name;
-  //   const data = { status: statusInput };
-  //   const body = JSON.stringify(data);
-
-  //   const url = `http://localhost:8080/api/services/${serviceId}/`;
-  //   const fetchConfig = {
-  //     method: "put",
-  //     body: body,
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
-
-  //   const response = await fetch(url, fetchConfig);
-
-  //   if (response.ok) {
-  //     const updatedService = await response.json();
-  //     console.log(updatedService);
-  //     window.location.reload();
-  //   }
-  // }
 
   render() {
     return (
@@ -99,11 +73,15 @@ class AppointmentList extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.appointments.map((appointment) => {
+                {this.state.appointments.map((appointment, i) => {
+                  let isComplete = "";
+                  if (appointment.completed === true) {
+                    isComplete = "d-none";
+                  }
                   const dateObj = new Date(appointment.time);
                   const options = { timeStyle: "short" };
                   return (
-                    <tr key={appointment.id}>
+                    <tr className={isComplete} key={appointment.id}>
                       <td>{appointment.auto_vin}</td>
                       <td>{appointment.customer_name}</td>
                       <td>{dateObj.toLocaleDateString()}</td>
@@ -111,43 +89,25 @@ class AppointmentList extends React.Component {
                       <td>{appointment.technician.name}</td>
                       <td>{appointment.reason}</td>
                       <td>
-                      <div className="btn-group" role="group">
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          onClick={this.handleCancel}
-                          value={appointment.id}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-success"
-                          onClick={this.handleFinish}
-                          value={appointment.id}
-                        >
-                          Finished
-                        </button>
-                      </div>
+                        <div className="btn-group" role="group">
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={this.handleCancel}
+                            value={appointment.id}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-success"
+                            onClick={() => this.handleFinish(appointment.id)}
+                            to=""
+                          >
+                            Finished
+                          </button>
+                        </div>
                       </td>
-                      {/* <td>
-                        <button
-                          className="btn btn-danger"
-                          onClick={this.handleCancel}
-                          value={appointment.id}
-                        >
-                          Cancel
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          className="btn btn-success"
-                          onClick={this.handleFinish}
-                          value={appointment.id}
-                        >
-                          Finished
-                        </button>
-                      </td> */}
                     </tr>
                   );
                 })}
