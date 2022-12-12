@@ -7,6 +7,7 @@ class AutomobileVO(models.Model):
     color = models.CharField(max_length=50)
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
+    
 
 class SalesPerson(models.Model):
     name = models.CharField(max_length=100)

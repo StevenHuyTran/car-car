@@ -41,15 +41,20 @@ class Sale_RecordForm extends React.Component {
     
     async handleSubmit(event){
         event.preventDefault();
-        const data = {...this.state};
+        const data = {
+          vin: this.state.vin,
+          sales_person: this.state.sales_person,
+          customer: this.state.customer,
+          price: this.state.price,
+        };
         console.log(data)
       
       
-        delete data.potentialCustomers
+        // delete data.potentialCustomers
       
-        delete data.automobiles
+        // delete data.automobiles
         
-        delete data.salesPerson
+        // delete data.salesPerson
 
         // console.log(data)
         const url = "http://localhost:8090/api/sales/sale_record"; 
