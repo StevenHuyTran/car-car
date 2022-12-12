@@ -26,7 +26,6 @@ class SalesList extends React.Component {
         const data = await response.json();
 
         if (response.ok) {
-            console.log(data)
             this.setState({ sales_list: data.sales });
         }
     }
@@ -50,7 +49,6 @@ class SalesList extends React.Component {
                                 <SalesTable
                                 sale={sales_list}
                                 key={sales_list.id}
-                               
                                 />
                             );
                         })}

@@ -29,6 +29,8 @@ def api_appointments(request):
                 content["vip"] = True
             except:
                 content["vip"] = False
+            content["completed"] = False
+            content["canceled"] = False
             appointment = Appointment.objects.create(**content)
             return JsonResponse(
                 appointment,
@@ -80,14 +82,6 @@ def api_technician_detail(request, pk):
 
 
 
-
-
-
-
-
-
-## I think this is meant to be appointment history, not detail
-
 @require_http_methods(["GET", "PUT", "DELETE"])
 def api_appointment_detail(request, pk):
     if request.method == "GET":
@@ -105,10 +99,10 @@ def api_appointment_detail(request, pk):
     elif request.method =="PUT":
         try:
             appointment = Appointment.objects.get(id=pk)
-            appointment.finish()
-            appointment.save()
+            appointment.complete()
+
             return JsonResponse({
-                "finished": appointment.finished,
+                "finished": "Appointment complete"
             })
         except Appointment.DoesNotExist:
             response = JsonResponse({"message": "Does not exist"})
@@ -117,3 +111,33 @@ def api_appointment_detail(request, pk):
     else:
         count, _ = Appointment.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
+
+
+
+@require_http_methods(["PUT"])
+def api_cancel_appointment(request, pk):
+    appointment = Appointment.objects.get(id=pk)
+    appointment.cancel()
+    return JsonResponse(
+        {"canceled": "Appointment has been canceled"}
+    )
+
+
+
+
+
+@require_http_methods(["GET"])
+def api_appointments_with_vin(request, vin):
+    appointments = Appointment.objects.filter(auto_vin__icontains=vin)
+    if len(appointments) > 0:
+        return JsonResponse(
+        {"appointments": appointments},
+            encoder=AppointmentEncoder,
+            safe=False,
+        )
+    else:
+        response = JsonResponse(
+            {"message": "VIN does not exist"}
+        )
+        response.status_code = 404
+        return response

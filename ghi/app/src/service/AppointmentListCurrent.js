@@ -110,8 +110,7 @@ class AppointmentList extends React.Component {
                       <td>{dateObj.toLocaleTimeString([], options)}</td>
                       <td>{appointment.technician.name}</td>
                       <td>{appointment.reason}</td>
-                      <td>
-                      <div className="btn-group" role="group">
+                      <td className="btn-group" role="group">
                         <button
                           type="button"
                           className="btn btn-danger"
@@ -128,7 +127,6 @@ class AppointmentList extends React.Component {
                         >
                           Finished
                         </button>
-                      </div>
                       </td>
                       {/* <td>
                         <button

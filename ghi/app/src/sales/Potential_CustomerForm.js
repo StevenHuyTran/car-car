@@ -40,10 +40,8 @@ class Potential_CustomerForm extends React.Component {
         },
     }
     const response = await fetch(url, fetchConfig);
-    console.log(response)
     if (response.ok) {
       const newPotentialCustomer = await response.json();
-      console.log(newPotentialCustomer);
       const cleared = {
         name:"",
         address:"",
@@ -53,17 +51,11 @@ class Potential_CustomerForm extends React.Component {
 }
 }
 render() {
-    let messageClasses = "alert alert-success d-none mb-0";
-    let formClasses = "";
-    if (this.state.newVehicle) {
-      messageClasses = "alert alert-success mb-0";
-      formClasses = "d-none";
-    }
     return (
         <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
-            <h1>Add a potential customer</h1>
+            <h1>Add a customer</h1>
             <form onSubmit = {this.handleSubmit} id="create-sales-person-form">
           <div className="form-floating mb-3">
           <input onChange ={this.handleNameChange} placeholder="Name" required type="text" name="name" id="name" className="form-control" value={this.state.name} />
@@ -81,9 +73,6 @@ render() {
         </form>
       </div>
     </div>
-    <div className={messageClasses} id="success-message">
-          Successfully added potential customer!
-        </div>
   </div>
     );
   }

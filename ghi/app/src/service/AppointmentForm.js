@@ -56,8 +56,17 @@ class AppointmentForm extends React.Component {
         technician: "",
       };
       this.setState(cleared);
-      // window.location.href = "/appointments";
+      window.location.href = "/services";
     }
+
+    // new code to implement vip. Sends PUT request to Service API to set VIP to True
+    // const vipUrl = `http://localhost:8080/api/appointments/${data.}`
+
+
+
+
+
+
   }
 
   handleVinChange(event) {
@@ -134,6 +143,7 @@ class AppointmentForm extends React.Component {
                 <input
                   value={this.state.vin}
                   onChange={this.handleVinChange}
+                  maxLength="17"
                   placeholder="vin"
                   required
                   type="text"

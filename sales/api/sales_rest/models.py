@@ -19,7 +19,7 @@ class SalesPerson(models.Model):
 class PotentialCustomer(models.Model): 
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
-    phone_number = models.PositiveIntegerField()
+    phone_number = models.PositiveBigIntegerField()
 
 class SaleRecord(models.Model): 
     automobile = models.ForeignKey(

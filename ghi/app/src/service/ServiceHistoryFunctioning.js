@@ -14,11 +14,10 @@ class ServiceHistoryList extends React.Component {
   handleVinChange(event) {
     const value = event.target.value;
     this.setState({ vin: value });
-    this.handleVinSearch();
   }
 
   async handleVinSearch(event) {
-    // event.preventDefault();
+    event.preventDefault();
     //Loading Vin info
     const data = { ...this.state };
     const url = `http://localhost:8080/api/appointments/${data["vin"]}`;
@@ -29,8 +28,6 @@ class ServiceHistoryList extends React.Component {
     if (response.ok) {
       const data = await response.json();
       this.setState({ appointments: data.appointments });
-    } else {
-      this.setState({ appointments: [] });
     }
   }
 
@@ -44,7 +41,6 @@ class ServiceHistoryList extends React.Component {
           type="text"
           className="form-control"
           placeholder="Vehicle VIN"
-          maxLength={17}
           aria-label="vin"
           onChange={this.handleVinChange}
           value={this.state.vin}
@@ -55,7 +51,7 @@ class ServiceHistoryList extends React.Component {
             className="btn btn-outline-secondary"
             type="button"
           >
-            List All VINs
+            Search VIN
           </button>
         </div>
         <h1>Service History</h1>
@@ -83,7 +79,6 @@ class ServiceHistoryList extends React.Component {
                   <td>{dateObj.toLocaleTimeString([], options)}</td>
                   <td>{appointment.technician.name}</td>
                   <td>{appointment.reason}</td>
-                  <td>{appointment.vip ? "yes" : "no"}</td>
                 </tr>
               );
             })}

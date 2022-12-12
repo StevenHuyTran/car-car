@@ -30,8 +30,8 @@ class VehicleModelList extends React.Component {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Picture</th>
               <th>Manufacturer</th>
+              <th>Picture</th>
             </tr>
           </thead>
           <tbody>
@@ -39,12 +39,12 @@ class VehicleModelList extends React.Component {
               return (
                 <tr key={model.id}>
                   <td>{model.name}</td>
+                  <td>{model.manufacturer.name}</td>
                   <td>
                     <img src={model.picture_url} width="100" />
                   </td>
-                  <td>{model.manufacturer.name}</td>
                 </tr>
-                
+
               );
             })}
           </tbody>

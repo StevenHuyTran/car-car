@@ -1,5 +1,4 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
 
 function EmployeeSalesTable({sale}) {
 
@@ -44,7 +43,6 @@ class EmployeeSalesList extends React.Component {
         const data = await response.json();
 
         if (response.ok) {
-            // console.log(data)
             this.setState({ employeeList: data.sales_person });
         }
     }
@@ -52,10 +50,9 @@ class EmployeeSalesList extends React.Component {
         return (
             <>
             <div>
-                <h1 className="shadow p-4 mt-4">Employee sales history</h1>
-                <Form.Select size="lg" onChange = {this.handleEmployeeChange} value={this.state.employee} required name="employee" id="employee" className="form-select">
+                <h1 className="shadow p-4 mt-4">Sales person history</h1>
+                <select onChange = {this.handleEmployeeChange} value={this.state.employee} required name="employee" id="employee" className="form-select">
                           <option value="">Choose a sales person</option>
-                          {/* {console.log(this)} */}
                           {this.state.employeeList.map(employee => {
                               return (
                                   <option key = {employee.id} value = {employee.id}>
@@ -63,7 +60,7 @@ class EmployeeSalesList extends React.Component {
                               </option>
                           )
                       })}
-                      </Form.Select>
+                      </select>
         
                 <table className="table table-striped">
                 <thead>
